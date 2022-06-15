@@ -13,6 +13,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
+import StoreIcon from '@mui/icons-material/Store';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Drawer from '@mui/material/Drawer';
@@ -224,9 +228,9 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 1 }} />
           
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large" aria-label="show 4 products" color="inherit">
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -292,7 +296,7 @@ export default function NavBar() {
 
         <Divider />
         
-        <List>
+        {/* <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -303,12 +307,47 @@ export default function NavBar() {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
+        <ListItem key= 'Favoritos' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <FavoriteIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Favoritos' />
+
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem key= 'Carrito' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <ShoppingCartIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Carrito' />
+
+              </ListItemButton>
+            </ListItem>
+
+        <ListItem key= 'Mi Tienda' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <StoreIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Mi Tienda' />
+
+              </ListItemButton>
+            </ListItem>
 
         <Divider />
 
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -317,7 +356,34 @@ export default function NavBar() {
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
-          ))}
+          ))} */}
+          
+          <ListItem key= 'Mensajes' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <MailIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Mensajes' />
+
+              </ListItemButton>
+            </ListItem>
+
+            <Divider />
+
+            <ListItem key= 'Ajustes' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <SettingsIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Ajustes' />
+
+              </ListItemButton>
+            </ListItem>
+
         </List>
 
       </Drawer>

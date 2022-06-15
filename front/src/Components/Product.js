@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShareIcon from '@mui/icons-material/Share';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { CardActionArea } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import accounting from 'accounting';
@@ -36,6 +37,8 @@ export default function ProductCard(props) {
               <Typography paragraph>{product.nombre}</Typography>
               <Typography variant="body2" color="text.secondary">{product.stock ? 'en stock' : 'sin stock'}</Typography>
             </CardContent>
+
+            </CardActionArea>
             
             <CardActions disableSpacing>
               <IconButton aria-label="add to shopping cart">
@@ -45,10 +48,13 @@ export default function ProductCard(props) {
               <IconButton aria-label="share">
                 <ShareIcon />
               </IconButton>
-           </CardActions>
 
-          </CardActionArea>
-        
+              <IconButton aria-label="add favorites">
+                 <FavoriteBorderIcon />
+              </IconButton>
+           </CardActions>
+           
+          
       </Card>
     
   );
