@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import productsReducer from './Reducer.js'
+import { configureStore } from '@reduxjs/toolkit';
+import productsReducer from './ReducerProducts.js';
+import userReducer from './ReducerUsers.js';
 
 export default configureStore({
   reducer: {
-    products: productsReducer
+    products: productsReducer,
+    user: userReducer
   }
 })

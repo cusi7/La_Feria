@@ -1,14 +1,17 @@
-import './App.css';
-// import NavBar from './Components/Navbar';
-import Home from './Components/Home';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Inicio from './Pages/Inicio.js';
+import Home from './Pages/Home.js';
 
 
 function App() {
   return (
-    <div className="App">
-      {/* <NavBar /> */}
-      <Home />
-    </div>
+    <BrowserRouter>
+        <Routes>
+            <Route path = '/' element = {<Home />} />
+            <Route exact path = '/I' element = {<Inicio />} /> 
+        </Routes>
+    </BrowserRouter>
   );
 }
 

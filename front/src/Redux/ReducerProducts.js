@@ -16,8 +16,8 @@ export const productsSlice = createSlice({
             descripcion: ['Taza de cerámica sublimada con diseño "Code".', 'Ideal para programadores.', 'Apta para microondas.'],
             imagen: "https://desarrolladores.me/wp-content/uploads/2018/06/mockup-27614189-600x600.jpg",
             usuario : {
-                id: 1,
-                avatar: "https://desarrolladores.me/wp-content/uploads/2018/06/mockup-27614189-600x600.jpg"
+                id: 2,
+              avatar: "https://img.freepik.com/vector-gratis/mujer-avatar-mujer-negocios_38295-63.jpg"
             }
         },
         {
@@ -49,8 +49,8 @@ export const productsSlice = createSlice({
           descripcion: ['Taza de cerámica sublimada con diseño "Code".', 'Ideal para programadores.', 'Apta para microondas.'],
           imagen: "https://desarrolladores.me/wp-content/uploads/2018/06/mockup-27614189-600x600.jpg",
           usuario : {
-              id: 1,
-              avatar: "https://desarrolladores.me/wp-content/uploads/2018/06/mockup-27614189-600x600.jpg"
+            id: 2,
+            avatar: "https://img.freepik.com/vector-gratis/mujer-avatar-mujer-negocios_38295-63.jpg"
           }
       },
       {

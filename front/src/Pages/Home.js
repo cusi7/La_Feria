@@ -1,12 +1,12 @@
 import React, { useEffect }from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { allProducts } from '../Redux/Reducer.js';
-import ProductCard from './Product.js';
+import { allProducts } from '../Redux/ReducerProducts.js';
+import ProductCard from '../Components/Product.js';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 
-import NavBar from './Navbar.js';
+import NavBar from '../Components/Navbar.js';
 
 
 export default function Home () {

@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React , { useEffect } from 'react';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
@@ -10,12 +11,15 @@ import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import StoreIcon from '@mui/icons-material/Store';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -29,6 +33,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Button from '@mui/material/Button';
+import { useSelector, useDispatch } from 'react-redux';
+import { user } from '../Redux/ReducerUsers.js';
 
 
 const drawerWidth = 240;
@@ -83,6 +90,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+
+  const actualUser = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
+
+  const mount = async function () {
+      try {
+          await dispatch(user());
+      } catch (error) {
+         console.log(error)
+      }
+  };
+
+  useEffect(() => {
+      console.log('Bienvenido');
+      mount();
+  }, []);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -194,7 +218,7 @@ export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1 }} >
       
-      <AppBar position="fixed" style={{ background: '#E8C84B' }} >
+      <AppBar position="fixed" style={{ background: '#EDB235' }} >
         
         <Toolbar>
           <IconButton
@@ -227,36 +251,39 @@ export default function NavBar() {
           
           <Box sx={{ flexGrow: 1 }} />
           
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          
+
+             {actualUser.nombre ? <>
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 products" color="inherit">
               <Badge badgeContent={4} color="error">
                  <ShoppingCartIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
+                  <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                  >
+                          <Badge badgeContent={17} color="error">
+                            <NotificationsIcon />
+                          </Badge>
+                  </IconButton>
 
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+                  <IconButton
+                          size="large"
+                          edge="end"
+                          aria-label="account of current user"
+                          aria-controls={menuId}
+                          aria-haspopup="true"
+                          onClick={handleProfileMenuOpen}
+                          color="inherit"
+                        >
+                          <Avatar alt= {actualUser.nombre} src= {actualUser.avatar} />
+                  </IconButton>
+                  </Box>
+                  <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <IconButton
               size="large"
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -266,8 +293,20 @@ export default function NavBar() {
             >
               <MoreIcon />
             </IconButton>
-          </Box>
-
+                  </Box>
+                  </> : <>
+                  <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                      <Button variant="contained" size="medium" style={{
+            backgroundColor: "#EDB235",
+            color: "#FFFFFF"
+        }}>REGISTRATE</Button>
+                      <Button variant="contained" size="medium" style={{
+            backgroundColor: "#EDB235",
+            color: "#FFFFFF"}}>INGRESA</Button>
+                  </Box>
+              </>
+             }
+        
         </Toolbar>
 
       </AppBar>
@@ -332,7 +371,22 @@ export default function NavBar() {
               </ListItemButton>
             </ListItem>
 
-        <ListItem key= 'Mi Tienda' disablePadding>
+            <ListItem key= 'Compras' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <ReceiptIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Compras' />
+
+              </ListItemButton>
+            </ListItem>
+
+            <Divider />
+
+         {actualUser.tienda ? <>
+          <ListItem key= 'Mi Tienda' disablePadding>
               <ListItemButton>
                 
                 <ListItemIcon>
@@ -343,6 +397,33 @@ export default function NavBar() {
 
               </ListItemButton>
             </ListItem>
+           </> : <>
+           <ListItem key= 'Crear Tienda' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <AddBusinessIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Crear Tienda' />
+
+              </ListItemButton>
+            </ListItem>
+           </>
+           }
+          
+           <ListItem key= 'Ventas' disablePadding>
+              <ListItemButton>
+                
+                <ListItemIcon>
+                   <BusinessCenterIcon />
+                </ListItemIcon>
+
+                <ListItemText primary= 'Ventas' />
+
+              </ListItemButton>
+            </ListItem>
+        
 
         <Divider />
 
