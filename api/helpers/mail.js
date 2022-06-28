@@ -20,7 +20,7 @@ const emailRegistro = async (datos) => {
     text: "Confirma tu cuenta",
     html: `
         <h3>Hola ${nombre}, confirma tu cuenta mediante el siguiente enlace</h3>
-        <a href=""><h4>CONFIRMA LA CUENTA</h4></a>
+        <a href="http://localhost:3000/confirmar/${token}"><h4>CONFIRMA LA CUENTA</h4></a>
         <p>Si tu no creaste una cuenta en La Feria, ignora este mail</p>
             `,
   });

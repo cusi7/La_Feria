@@ -7,16 +7,17 @@ import Box from '@mui/material/Box';
 
 
 import NavBar from '../Components/Navbar.js';
+import {getUsuario} from '../Redux/ActionsUser.js';
 
 
 export default function Home () {
 
-    const products = useSelector(state => state.products.products);
     const dispatch = useDispatch();
 
     const mount = async function () {
         try {
             await dispatch(allProducts());
+            await dispatch(getUsuario());
         } catch (error) {
            console.log(error)
         }
@@ -27,11 +28,14 @@ export default function Home () {
         mount();
     }, []);
 
+    const products = useSelector(state => state.products.products);
+    const userActual = useSelector(state => state.user.user);
+
 
     return (
 
         <Box sx={{ display: 'flex' }} bgcolor="#F5EFF3" >
-            <NavBar />
+            <NavBar usuario = {userActual}/>
              <Box mt= {9} >
              <Grid container spacing={1} >
             

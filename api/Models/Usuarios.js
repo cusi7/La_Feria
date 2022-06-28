@@ -6,6 +6,7 @@ const usuarioSchema = new Schema({
         
     nombre: {
         type: String,
+        maxlength: 15,
         require: true,
         unique: true,
     },
@@ -21,6 +22,7 @@ const usuarioSchema = new Schema({
     },
     password: {
         type: String,
+        minlength: 7,
         require: true
     },
     avatar: {
@@ -57,6 +59,10 @@ const usuarioSchema = new Schema({
     },
     token: {
         type: String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 }) 
 

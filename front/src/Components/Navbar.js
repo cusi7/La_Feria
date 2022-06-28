@@ -1,7 +1,9 @@
 import React , { useEffect } from 'react';
-import { styled, alpha, useTheme } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { styled, alpha, useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -32,10 +34,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Button from '@mui/material/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import { user } from '../Redux/ReducerUsers.js';
+
+import Registro from '../Pages/Register.js';
+import Login from '../Pages/Login.js';
 
 
 const drawerWidth = 240;
@@ -89,9 +91,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar() {
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
-  const actualUser = useSelector(state => state.user.user);
+export default function NavBar(props) {
+
+  const actualUser = props.usuario;
   const dispatch = useDispatch();
 
   const mount = async function () {
@@ -107,11 +115,21 @@ export default function NavBar() {
       mount();
   }, []);
 
+  const [openR, setOpenR] = React.useState(false);
+  const openRegister = () => setOpenR(true);
+  const closeRegister = () => setOpenR(false);
+
+  const [openL, setOpenL] = React.useState(false);
+  const openLogin = () => setOpenL(true);
+  const closeLogin = () => setOpenL(false);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [user, setUser] = React.useState({});
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -299,10 +317,10 @@ export default function NavBar() {
                       <Button variant="contained" size="medium" style={{
             backgroundColor: "#EDB235",
             color: "#FFFFFF"
-        }}>REGISTRATE</Button>
+        }} onClick={openRegister}>REGISTRATE</Button>
                       <Button variant="contained" size="medium" style={{
             backgroundColor: "#EDB235",
-            color: "#FFFFFF"}}>INGRESA</Button>
+            color: "#FFFFFF"}} onClick={openLogin}>INGRESA</Button>
                   </Box>
               </>
              }
@@ -312,6 +330,27 @@ export default function NavBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Modal
+        open={openR}
+        onClose={closeRegister}
+      >
+        <ThemeProvider theme={darkTheme}>
+         
+               <Registro />
+          
+        </ThemeProvider>
+      </Modal>
+
+      <Modal
+        open={openL}
+        onClose={closeLogin}
+      >
+        <ThemeProvider theme={darkTheme}>
+         
+               <Login />
+          
+        </ThemeProvider>
+      </Modal>
 
       <Drawer
         sx={{

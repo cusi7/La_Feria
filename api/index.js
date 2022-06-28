@@ -1,5 +1,6 @@
 const express = require ('express');
 const cors = require ('cors');
+const bodyparser = require('body-parser');
 const dotenv = require ('dotenv');
 const DB = require ('./db.js');
 const routes = require('./Routes/index.js');
@@ -14,7 +15,8 @@ DB();
 app.use(cors());
 
 //MIDDLEWARES
-app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 app.use('/', routes);
 
